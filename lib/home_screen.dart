@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:dojotbm/api/dtos/lines/line_record.dart';
 import 'package:dojotbm/api/dtos/realtime/realtime_record.dart';
-import 'package:dojotbm/t_b_m_map.dart';
+import 'package:dojotbm/tbm_map.dart';
 import 'package:flutter/material.dart';
 
 import 'api/api.dart';
@@ -68,19 +68,18 @@ class _HomeScreenState extends State<HomeScreen>
 
   getLine() {
     Api.line(selectedLine).then((value) => this.setState(() {
-      line = value.records;
-    }));
+          line = value.records;
+        }));
   }
 
   refreshData() {
     controller.repeat();
-    Api.realtimeTraffic(selectedLine)
-        .then((value) => this.setState(() {
-              records = value.records;
-              controller.forward();
-            }));
+    Api.realtimeTraffic(selectedLine).then((value) => this.setState(() {
+          records = value.records;
+          controller.forward();
+        }));
   }
-  
+
   changeLine(String newLine) {
     this.setState(() {
       selectedLine = newLine;
@@ -90,32 +89,32 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   List<Widget> _buildDrawerTiles() => <Widget>[
+        DrawerHeader(
+          decoration: BoxDecoration(
+            color: Colors.blue,
+          ),
+        ),
         ListTile(
           title: Text("Tram A"),
-          leading: _generateTramIcon("A", Colors.purple),
+          leading: CircleAvatar(
+            backgroundImage: AssetImage("assets/icon_tram_a.png"),
+            backgroundColor: Colors.transparent,
+          ),
           onTap: () => changeLine("Tram A"),
         ),
         ListTile(
           title: Text("Tram B"),
-          leading: _generateTramIcon("B", Colors.red),
+          leading: CircleAvatar(
+              backgroundImage: AssetImage("assets/icon_tram_b.png"),
+              backgroundColor: Colors.transparent),
           onTap: () => changeLine("Tram B"),
         ),
         ListTile(
           title: Text("Tram C"),
-          leading: _generateTramIcon("C", Colors.green),
+          leading: CircleAvatar(
+              backgroundImage: AssetImage("assets/icon_tram_c.png"),
+              backgroundColor: Colors.transparent),
           onTap: () => changeLine("Tram C"),
         ),
       ];
-
-  Widget _generateTramIcon(String letter, Color color) {
-    return Container(
-      decoration: BoxDecoration(
-          color: color, borderRadius: BorderRadius.all(Radius.circular(10.0))),
-      child: Text(
-        letter,
-        style: TextStyle(color: Colors.white),
-        textAlign: TextAlign.center,
-      ),
-    );
-  }
 }
