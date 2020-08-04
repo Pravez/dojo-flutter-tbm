@@ -8,7 +8,7 @@ class Api {
   static const _search_endpoint =
       "https://opendata.bordeaux-metropole.fr/api/records/1.0/search/";
   static const _lines_endpoint =
-      "$_search_endpoint?dataset=tb_chem_l&q=&facet=nomcomli&facet=sens";
+      "$_search_endpoint?dataset=tb_chem_l&q=&facet=nomcomli&facet=sens&refine.sens=Aller";
   static const _realtime_endpoint =
       "$_search_endpoint?dataset=sv_vehic_p&q=&facet=etat&facet=type&facet=statut&facet=sens&rows=50&refine.type=TRAM_LONG";
 
